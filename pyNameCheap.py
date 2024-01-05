@@ -10,7 +10,7 @@ logger = logging.getLogger()
 api_endpoints = ["https://api.ipify.org", "http://wtfismyip.com/text"]
 domain = os.environ.get("domain", "domain.com")
 hosts = os.environ.get("hosts", "a,b,c")
-ddns_password = os.environ.get("ddns_password ", "password")
+ddns_password = os.environ.get("ddns_password", "password")
 refresh_interval = float(os.environ.get("refresh_interval", 600))
 
 
