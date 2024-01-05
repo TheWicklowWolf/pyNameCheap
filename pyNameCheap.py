@@ -43,19 +43,24 @@ def update_dynamic_dns(ip):
                         end_index = req.text.find("</ResponseString>", start_index)
                         response_string = req.text[start_index + len("<ResponseString>") : end_index]
 
-                        logger.error(f"ResponseString: {response_string.strip()}")
+                        if "A record not Found" in response_string:
+                            error_string = "Wrong Sub Domain Name"
+                        elif "password" in response_string:
+                            error_string = "Wrong DDNS Password"
+                        elif "domain name(s)" in response_string:
+                            error_string = "Wrong Domain Name"
+                        else:
+                            error_string = "Unknown Error"
+                        logger.error(f"{error_string} for {host}.{domain}")
                     else:
                         logger.info(f"Dynamic Address update successful for {host}.{domain}")
 
                 except Exception as e:
                     logger.warning(f"Failed to parse XML response: {e}")
                     logger.info(f"Dynamic Address update successful for {host}.{domain}")
-                    logger.info(f"Response content: {req.text}")
 
             else:
                 logger.error(f"Failed to update Dynamic Address for {host}.{domain}, HTTP Status Code: {req.status_code}")
-                logger.error("Response content:")
-                logger.error(req.text)
 
         except Exception as e:
             logger.error(f"Error updating Dynamic Address for {host}.{domain}: {e}")
