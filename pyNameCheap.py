@@ -53,7 +53,10 @@ def update_dynamic_dns(ip):
                             error_string = "Unknown Error"
                         logger.error(f"{error_string} for {host}.{domain}")
                     else:
-                        logger.info(f"Dynamic Address update successful for {host}.{domain}")
+                        ip_start = req.text.find("<IP>")
+                        ip_end = req.text.find("</IP>", ip_start)
+                        updated_ip = req.text[ip_start + len("<IP>") : ip_end]
+                        logger.info(f"Dynamic Address update successful for {host}.{domain} at IP: {updated_ip}")
 
                 except Exception as e:
                     logger.warning(f"Failed to parse XML response: {e}")
