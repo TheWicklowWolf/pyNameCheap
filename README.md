@@ -12,7 +12,7 @@ services:
     image: thewicklowwolf/pynamecheap:latest
     container_name: pynamecheap
     environment:
-      - domain=domainA
+      - domain=domain.com
       - hosts=a,b,c
       - ddns_password=password
       - refresh_interval=600
