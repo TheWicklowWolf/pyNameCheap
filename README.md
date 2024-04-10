@@ -6,7 +6,6 @@ NameCheap Domain IP Updater.
 ## Run using docker-compose
 
 ```yaml
-version: "2.1"
 services:
   pynamecheap:
     image: thewicklowwolf/pynamecheap:latest
