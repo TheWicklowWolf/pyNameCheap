@@ -30,7 +30,7 @@ jobs:
       - name: Get current version
         id: get_version
         run: |
-          VERSION=$(git tag --list --sort=-v:refname | head -n 1 | sed 's/^v//')
+          VERSION=$(git tag --list | sed 's/^v//' | awk -F. '{ if (NF == 2) printf("%s.0.%s\n", $1, $2); else print $0 }' | sort -V | tail -n 1 | sed 's/^/v/')
           echo "CURRENT_VERSION=$VERSION" >> $GITHUB_ENV
           echo "Current version: $VERSION"
 
