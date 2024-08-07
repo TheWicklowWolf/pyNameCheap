@@ -7,10 +7,16 @@ import requests
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 logger = logging.getLogger()
 
+app_name_text = os.path.basename(__file__).replace(".py", "")
+release_version = os.environ.get("RELEASE_VERSION", "unknown")
+logger.info(f"{'*' * 50}\n")
+logger.info(f"{app_name_text} Version: {release_version}\n")
+logger.info(f"{'*' * 50}")
+
 api_endpoints = ["https://api.ipify.org", "http://wtfismyip.com/text"]
 domain = os.environ.get("domain", "domain.com")
 hosts = os.environ.get("hosts", "a,b,c")
-ddns_password = os.environ.get("ddns_password", "password")
+ddns_password = os.environ.get("ddns_password ", "password")
 refresh_interval = float(os.environ.get("refresh_interval", 600))
 
 
