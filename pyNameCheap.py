@@ -80,4 +80,5 @@ while True:
 
     update_dynamic_dns(ip)
     logger.info(f"Sleeping for {refresh_interval} seconds")
+    
     time.sleep(refresh_interval)
